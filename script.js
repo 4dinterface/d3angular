@@ -61,8 +61,10 @@ docsSimpleDirective
     
     f1();
     
-    $scope.onClick=function(){
-        alert ('onClick');
+    $scope.onClick=function(e){                        
+        $scope.$apply(function(){
+            e.frequency+=0.05;
+        });
     }
   })
 

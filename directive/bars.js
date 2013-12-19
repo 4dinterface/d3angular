@@ -86,8 +86,8 @@
         .split(' ').forEach(function(name,num){
             var ngName='ng'+name.charAt(0).toUpperCase() + name.slice(1);
             if ( $attrs[ ngName ]) {                
-                element.on(name,function(){
-                   me.$parse (me.$attrs[ ngName ])(me.$scope,{}); 
+                element.on(name,function(e){
+                   me.$parse (me.$attrs[ ngName ])(me.$scope,{$event:e}); 
                 });                
             }
         });

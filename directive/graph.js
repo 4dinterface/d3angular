@@ -48,8 +48,7 @@ var docsSimpleDirective=angular.module('docsSimpleDirective', [])
             $scope.y=y; //ось Y               		
             $scope.width=width;
             $scope.height=height;		
-            $scope.svg=svg; //контекст в котором рисуем		
-            
+            $scope.svg=svg; //контекст в котором рисуем		            
             
         }		
     }
