@@ -38,10 +38,11 @@
         <script src="script.js"></script>
 
     <div ng-controller="Ctrl">
-	<my-customer data="data">             
+	<my-customer data="data">
             <xaxis> </xaxis>
             <yaxis> </yaxis>            
-            <bar ng-click="$parent.onClick()"></bar> 
+            <bar ng-click="$parent.onClick()" >                    
+            </bar> 
             <points> </points>
             <paths> </paths>            
         </my-customer>
