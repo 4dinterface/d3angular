@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+.bar {
+  fill: steelblue;
+}
+
+.bar:hover {
+  fill: brown;
+}
+
+.axis {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}
+
+</style>
+<body ng-app="docsSimpleDirective" >
+	<script src="http://code.angularjs.org/1.2.0/angular.min.js"></script>
+	<script src="d3.v3.min.js"></script>
+        <script src="directive/graph.js"></script>	
+	<script src="directive/bars.js"></script>
+	<script src="directive/xAxis.js"></script>
+        <script src="directive/yAxis.js"></script>
+        <script src="directive/points.js"></script>
+        <script src="directive/paths.js"></script>
+        <script src="script.js"></script>
+
+    <div ng-controller="Ctrl">
+	<my-customer data="data">             
+            <xaxis> </xaxis>
+            <yaxis> </yaxis>            
+            <bar></bar> 
+            <points class="test"> </points>
+            <paths> </paths>            
+        </my-customer>
+    </div>
+</body>
