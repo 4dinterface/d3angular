@@ -2,14 +2,14 @@
 <meta charset="utf-8">
 <style>
 
-.link {
-  stroke: #ccc;
-}
+    .link {
+      stroke: #ccc;
+    }
 
-.node text {
-  pointer-events: none;
-  font: 10px sans-serif;
-}
+    .node text {
+      pointer-events: none;
+      font: 10px sans-serif;
+    }
 
 </style>
 <body>
@@ -66,6 +66,7 @@ d3.json("graph.json", function(error, json) {
 
     node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
   });
+  
 });
 
 </script>
