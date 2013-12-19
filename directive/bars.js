@@ -4,23 +4,24 @@
         return {
             restrict: 'E',
             require: '^myCustomer',
-            controller:function($scope){
+            controller:function($scope,$attrs,$parse){
                 $scope.$watch('svg',function(){                        
                     var x=$scope.x;
                     var y=$scope.y;
                     console.log(x);
-                    new init(x,y,$scope,$scope.width,$scope.height,$scope.xAxis,$scope.yAxis);
+                    new init(x,y,$scope,$scope.width,$scope.height,$scope.xAxis,$scope.yAxis,$attrs,$parse);
                 });			
             }
         }
     })	
 	
-    function init(x,y,$scope,width,height,xAxis,yAxis){            
+    function init(x,y,$scope,width,height,xAxis,yAxis,$attrs,$parse){            
         var me=this,
             svg=$scope.svg,
             bar=svg.selectAll(".bar");
-                
-        //bar.data($scope.data);
+    
+        this.$attrs=$attrs    
+        this.$parse=$parse;                                    
         this.$scope=$scope;
 		
         //сдесь будем хранить подписчики
@@ -45,7 +46,8 @@
      */
      p.renderBar=function(bar,height,x,y){
         var watchFunc=[],
-            $scope=this.$scope;
+            $scope=this.$scope,
+            me=this;
             
         //рисуем bar
         bar.data($scope.data)
@@ -58,6 +60,8 @@
                 .attr("class", "bar")
                 .attr("x", function(d) { return x(d.letter); })
                 .attr("width", x.rangeBand());		
+        
+            me.makeEvent(sel)
                         
             // слушаем массив data,одна ячейка, один столбец
             // изменилась ячейка изменился столбец
@@ -72,5 +76,21 @@
         });//each	
                 
         return watchFunc;
-    }		
+    }	
+    
+    //Эксперементальная реализация событий в BAR
+    p.makeEvent=function(element){
+        var $attrs=this.$attrs;
+        var me=this;
+        'click dblclick mousedown mouseup mouseover mouseout mousemove mouseenter mouseleave keydown keyup keypress submit focus blur copy cut paste'
+        .split(' ').forEach(function(name,num){
+            var ngName='ng'+name.charAt(0).toUpperCase() + name.slice(1);
+            if ( $attrs[ ngName ]) {                
+                element.on(name,function(){
+                   me.$parse (me.$attrs[ ngName ])(me.$scope,{}); 
+                });                
+            }
+        });
+    }
+    
 }(docsSimpleDirective);

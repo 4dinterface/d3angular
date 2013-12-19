@@ -43,10 +43,10 @@
      * Рисуем бары
      */
      p.renderBar=function(height,x,y){
-        var  me=this;        
-         
-        var watchFunc=[],
-            $scope=this.$scope;
+        var  me=this,
+             watchFunc=[],
+             $scope=this.$scope;
+             
         
         var circle = $scope.svg.selectAll("circle").data($scope.data);                                
         circle.enter().append("circle")
@@ -54,9 +54,10 @@
         .each(function(a,b,c) { 
             var sel=d3.select(this)                                
                 .attr("cx", function(d) { return  x(d.letter)+x.rangeBand()/2; }  )
-                .attr("cy", function(d) { return  height } )
-                .attr("class", "circle "+me.$attrs['class'])
+                .attr("cy", function(d) { return  height } )                
                 .attr("r", 4);
+        
+            me.makeAttr(sel,me.$attrs);
     
             watchFunc.push( 
                 $scope.$watchCollection('data['+b+']',function(){
@@ -68,5 +69,12 @@
         })          
                 
         return watchFunc;
-    }		
+    }	
+    
+    //атрибуты
+    p.makeAttr=function(element,$attrs){
+        //атрибут класс
+        element.attr("class", "circle "+this.$attrs['class']||"")                
+    }
+    
 }(docsSimpleDirective);            

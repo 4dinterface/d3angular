@@ -60,6 +60,10 @@ docsSimpleDirective
     }
     
     f1();
+    
+    $scope.onClick=function(){
+        alert ('onClick');
+    }
   })
 
 
